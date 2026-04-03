@@ -9,7 +9,7 @@ export function usePosts() {
 
   useEffect(() => {
     getPosts()
-      .then((res) => setPosts(res.data))
+      .then((res) => setPosts(Array.isArray(res.data) ? res.data : []))
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false))
   }, [])

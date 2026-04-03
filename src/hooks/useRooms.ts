@@ -9,7 +9,7 @@ export function useRooms() {
 
   useEffect(() => {
     getRooms()
-      .then((res) => setRooms(res.data))
+      .then((res) => setRooms(Array.isArray(res.data) ? res.data : []))
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false))
   }, [])

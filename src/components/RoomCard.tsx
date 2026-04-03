@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { cn } from '@/lib/utils'
 import type { Room } from '@/types/room.types'
 
 interface RoomCardProps {
@@ -26,12 +27,18 @@ export default function RoomCard({ room }: RoomCardProps) {
         <p className="mt-1 text-primary font-medium">{room.price} VNĐ / đêm</p>
       </CardContent>
       <CardFooter className="p-4 pt-0 flex gap-2">
-        <Button asChild variant="outline" size="sm">
-          <Link to={`/rooms/${room.id}`}>Xem chi tiết</Link>
-        </Button>
-        <Button asChild size="sm">
-          <Link to={`/booking?room=${room.id}`}>Đặt phòng</Link>
-        </Button>
+        <Link
+          to={`/rooms/${room.id}`}
+          className={cn(buttonVariants({ variant: 'outline', size: 'sm' }))}
+        >
+          Xem chi tiết
+        </Link>
+        <Link
+          to={`/booking?room=${room.id}`}
+          className={cn(buttonVariants({ size: 'sm' }))}
+        >
+          Đặt phòng
+        </Link>
       </CardFooter>
     </Card>
   )

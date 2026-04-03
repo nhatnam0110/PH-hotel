@@ -1,19 +1,49 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+import { cn } from '@/lib/utils'
+
+const navLinks = [
+  { to: '/', label: 'Trang Chủ' },
+  { to: '/rooms', label: 'Loại Phòng' },
+  { to: '/news', label: 'Tin Tức' },
+  { to: '/yen-sao', label: 'Yến Sào' },
+  { to: '/contact', label: 'Liên Hệ' },
+]
 
 export default function Header() {
+  const { pathname } = useLocation()
+
   return (
-    <header className="bg-background border-b border-border px-6 py-4 flex items-center justify-between">
-      <Link to="/" className="text-xl font-semibold text-primary">
-        Khách Sạn Phúc Hưng
+    <nav className="sticky top-0 w-full z-50 bg-background/70 backdrop-blur-xl shadow-sm shadow-on-surface-variant/5 flex justify-between items-center px-8 py-4">
+      <Link
+        to="/"
+        className="text-2xl font-headline font-bold text-primary uppercase tracking-tighter"
+      >
+        Phuc Hung Hotel
       </Link>
-      <nav className="flex gap-6 text-sm">
-        <Link to="/" className="hover:text-primary transition-colors">Trang Chủ</Link>
-        <Link to="/rooms" className="hover:text-primary transition-colors">Phòng Nghỉ</Link>
-        <Link to="/booking" className="hover:text-primary transition-colors">Đặt Phòng</Link>
-        <Link to="/yen-sao" className="hover:text-primary transition-colors">Yến Sào</Link>
-        <Link to="/news" className="hover:text-primary transition-colors">Tin Tức</Link>
-        <Link to="/contact" className="hover:text-primary transition-colors">Liên Hệ</Link>
-      </nav>
-    </header>
+
+      <div className="hidden md:flex items-center gap-8 font-headline text-lg tracking-wide">
+        {navLinks.map(({ to, label }) => (
+          <Link
+            key={to}
+            to={to}
+            className={cn(
+              'transition-colors',
+              pathname === to
+                ? 'text-primary border-b-2 border-secondary pb-1'
+                : 'text-tertiary hover:text-primary'
+            )}
+          >
+            {label}
+          </Link>
+        ))}
+      </div>
+
+      <Link
+        to="/booking"
+        className="ruby-gradient text-on-primary px-6 py-2.5 rounded-lg font-label font-semibold tracking-wide hover:opacity-90 transition-all active:scale-95 duration-200"
+      >
+        Đặt Phòng
+      </Link>
+    </nav>
   )
 }
