@@ -80,20 +80,25 @@ export default function Home() {
 
       {/* ── Featured Rooms ── */}
       <ScrollFadeIn>
-        <section className="bg-surface-container-low py-24 px-8">
-          <div className="max-w-7xl mx-auto">
-            <div className="flex justify-between items-end mb-16">
-              <div>
-                <h2 className="font-headline text-4xl text-tertiary mb-2">Loại Phòng Nghỉ</h2>
-                <p className="text-on-surface-variant tracking-wide">
-                  Tận hưởng không gian nghỉ ngơi đẳng cấp
+        <section className="py-32 bg-surface-container-low">
+          <div className="max-w-screen-2xl mx-auto px-12">
+            <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+              <div className="max-w-2xl">
+                <h2 className="font-headline italic text-5xl md:text-7xl text-on-surface">
+                  Living Spaces
+                </h2>
+                <p className="mt-6 text-lg text-on-surface-variant font-light italic">
+                  Each room is a dialogue between traditional craftsmanship and modern coastal luxury.
                 </p>
               </div>
               <Link
                 to="/rooms"
-                className="text-primary font-bold border-b-2 border-secondary pb-1 hover:text-secondary transition-colors"
+                className="text-primary font-bold tracking-tighter flex items-center gap-2 group"
               >
-                Xem tất cả phòng
+                VIEW ALL SUITES
+                <span className="material-symbols-outlined group-hover:translate-x-2 transition-transform">
+                  arrow_right_alt
+                </span>
               </Link>
             </div>
 
@@ -103,17 +108,19 @@ export default function Home() {
               </p>
             )}
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
               {loading
                 ? Array.from({ length: 3 }).map((_, i) => (
                     <div key={i} className="space-y-4">
                       <Skeleton className="w-full aspect-[4/5] rounded-xl" />
-                      <Skeleton className="h-6 w-3/4" />
+                      <Skeleton className="h-8 w-3/4" />
                       <Skeleton className="h-4 w-full" />
-                      <Skeleton className="h-4 w-1/2" />
+                      <Skeleton className="h-6 w-1/2" />
                     </div>
                   ))
-                : featured.map((room) => <RoomCard key={room.id} room={room} />)
+                : featured.map((room, i) => (
+                    <RoomCard key={room.id} room={room} featured={i === 1} />
+                  ))
               }
             </div>
           </div>
@@ -179,28 +186,69 @@ export default function Home() {
 
       {/* ── Yến Sào ── */}
       <ScrollFadeIn>
-        <section className="py-12 px-8">
-          <div className="max-w-7xl mx-auto bg-tertiary-container/10 rounded-2xl overflow-hidden flex flex-col md:flex-row items-center">
-            <div className="w-full md:w-1/3">
-              <img
-                src={YEN_SAO_IMG}
-                alt="Yến Sào Phúc Hưng"
-                className="w-full h-64 object-cover"
-              />
-            </div>
-            <div className="p-12 md:flex-1 text-center md:text-left">
-              <h3 className="font-headline text-2xl text-tertiary mb-2">Yến Sào Phúc Hưng</h3>
-              <p className="text-on-surface-variant italic">
-                Quà tặng sức khỏe thượng hạng từ thiên nhiên.
-              </p>
-            </div>
-            <div className="p-12">
-              <Link
-                to="/yen-sao"
-                className="text-secondary font-bold text-sm uppercase tracking-widest border-b-2 border-secondary pb-1 hover:opacity-70 transition-all"
-              >
-                Khám phá ngay
-              </Link>
+        <section className="py-32 bg-surface">
+          <div className="max-w-screen-2xl mx-auto px-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+              {/* Text + products */}
+              <div className="space-y-10 order-2 lg:order-1">
+                <div className="space-y-4">
+                  <span className="text-sm font-bold tracking-[0.3em] text-primary uppercase">
+                    Phuc Hung Bird's Nest
+                  </span>
+                  <h2 className="font-headline text-6xl md:text-7xl leading-tight">
+                    Món Quà <br /> Cho Sức Khỏe
+                  </h2>
+                  <p className="text-lg text-on-surface-variant leading-relaxed max-w-lg">
+                    Experience the pinnacle of coastal wellness. Our ethically sourced Yến Sào
+                    (Bird's Nest) collection represents our heritage of health and vitality,
+                    packaged with the same elegance as our retreat.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-2 gap-8">
+                  <div className="group cursor-pointer">
+                    <div className="aspect-square bg-surface-container rounded-lg overflow-hidden mb-4">
+                      <img
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDihw1rY49P-wzBEJFb0-dV1cEevKXwxgCpsodk88N7tEYDCged14L29quJUdT8RGarTF_VmjuSwEiorVBAe0NH-5HW2Lh_wjLPSGNYM1xvljD8PW1wlUAS5SA7_vRYwbi-Kojna2AFyGeMTx-Uorx_1Fve0CXZiP5AB1C-a4GYagRfzVDcKbUsV9KBgV_p9soGeuKql8aUhEPbwOU85CTe2VwfoCuqEHUdfPyFhnBsjgcRNwifqdyB0Bk1xNk0yFwTLbFQB5hSwpc"
+                        alt="Premium Gift Box"
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                    </div>
+                    <h5 className="font-headline text-xl italic">The Imperial Collection</h5>
+                  </div>
+                  <div className="group cursor-pointer">
+                    <div className="aspect-square bg-surface-container rounded-lg overflow-hidden mb-4">
+                      <img
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2OPw0avFEIybtprVr2xYq2lfHNL7vwYLQzd4PwGW2V2nWfSoZaChiQjbMplsM2sAV5nk6_361KA72CsCia6QO1iG-9GUzi7EVwduKQtw9OrUN8yUSIYdq-vkmeje_Pk-3X86pzz-EjEXRrakGgyEJbS6pxnf7bq-SO08Nn6g4FiTnaJU6P3T5vyjlZmo0bb07vy7WnzYfRJAQkxUTFHs2J3aZt2ocqz1YgGtYqS3MuGct98dy2ovZPv-w7qfzGXZgkWMsl1uLZlk"
+                        alt="Artisanal Nest"
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                    </div>
+                    <h5 className="font-headline text-xl italic">Pure Raw Selection</h5>
+                  </div>
+                </div>
+
+                <Link
+                  to="/yen-sao"
+                  className="flex items-center gap-4 text-on-surface font-bold uppercase tracking-widest group border-b border-on-surface pb-2 w-fit"
+                >
+                  Explore the Gallery
+                  <span className="material-symbols-outlined text-primary group-hover:translate-x-2 transition-transform">
+                    arrow_outward
+                  </span>
+                </Link>
+              </div>
+
+              {/* Lifestyle image */}
+              <div className="relative order-1 lg:order-2">
+                <div className="aspect-[4/5] rounded-xl overflow-hidden shadow-2xl">
+                  <img
+                    src={YEN_SAO_IMG}
+                    alt="Yến Sào Phúc Hưng lifestyle"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </section>
